@@ -1,38 +1,54 @@
 /* ==========================================================================
    RV UNIVERSITY PLACEMENTS PAGE REDESIGN
-   Brand Colors: RVU Royal Navy (#002147) & Heritage Gold (#EAAA00)
-   Designed for Stakeholders: Corporate Partners, Students & Parents
+   Exact College Brand Colors specified:
+   - Blue Shade Color: #233039 (RVU Signature Slate Blue)
+   - Golden Color: #d3a957 (RVU Warm College Gold)
    ========================================================================== */
 
 :root {
-  --rvu-navy: #002147;
-  --rvu-navy-dark: #00152e;
-  --rvu-navy-light: #0d3266;
-  --rvu-navy-tint: #eaf1fa;
-  --rvu-gold: #eaaa00;
-  --rvu-gold-hover: #c99200;
-  --rvu-gold-dark: #a87900;
-  --rvu-gold-light: #fff8e6;
-  --rvu-crimson: #a31d24;
-  --rvu-emerald: #0d9488;
-  --rvu-slate-900: #0f172a;
-  --rvu-slate-800: #1e293b;
-  --rvu-slate-700: #334155;
-  --rvu-slate-600: #475569;
-  --rvu-slate-500: #64748b;
-  --rvu-slate-400: #94a3b8;
-  --rvu-slate-200: #e2e8f0;
-  --rvu-slate-100: #f1f5f9;
-  --rvu-slate-50: #f8fafc;
+  /* Exact User-Specified College Colors */
+  --rvu-primary: #233039;
+  --rvu-primary-dark: #151e24;
+  --rvu-primary-light: #2e3f4a;
+  --rvu-primary-tint: #ebf1f4;
+  
+  --rvu-secondary: #d3a957;
+  --rvu-secondary-hover: #be9443;
+  --rvu-secondary-dark: #9b752b;
+  --rvu-secondary-light: #faf5eb;
+  --rvu-secondary-border: rgba(211, 169, 87, 0.4);
+  
+  /* Semantic Aliases */
+  --rvu-navy: #233039;
+  --rvu-navy-dark: #151e24;
+  --rvu-navy-light: #2e3f4a;
+  --rvu-navy-tint: #ebf1f4;
+  --rvu-gold: #d3a957;
+  --rvu-gold-hover: #be9443;
+  --rvu-gold-dark: #9b752b;
+  --rvu-gold-light: #faf5eb;
+  
+  --rvu-heading: #050a09;
+  --rvu-body: #04070a;
+  
+  --rvu-slate-900: #151e24;
+  --rvu-slate-800: #233039;
+  --rvu-slate-700: #2e3f4a;
+  --rvu-slate-600: #495863;
+  --rvu-slate-500: #62727e;
+  --rvu-slate-400: #8a9ba7;
+  --rvu-slate-200: #d6e0e6;
+  --rvu-slate-100: #ebf1f4;
+  --rvu-slate-50: #f7fafc;
   --rvu-white: #ffffff;
   
   --rvu-font-display: 'Playfair Display', Georgia, serif;
   --rvu-font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
-  --rvu-shadow-sm: 0 1px 3px rgba(0, 33, 71, 0.06), 0 1px 2px rgba(0, 33, 71, 0.04);
-  --rvu-shadow-md: 0 4px 12px rgba(0, 33, 71, 0.08), 0 2px 4px rgba(0, 33, 71, 0.04);
-  --rvu-shadow-lg: 0 12px 28px rgba(0, 33, 71, 0.12), 0 4px 8px rgba(0, 33, 71, 0.06);
-  --rvu-shadow-gold: 0 8px 20px rgba(234, 170, 0, 0.25);
+  --rvu-shadow-sm: 0 1px 3px rgba(35, 48, 57, 0.08), 0 1px 2px rgba(35, 48, 57, 0.04);
+  --rvu-shadow-md: 0 4px 12px rgba(35, 48, 57, 0.1), 0 2px 4px rgba(35, 48, 57, 0.06);
+  --rvu-shadow-lg: 0 12px 28px rgba(35, 48, 57, 0.14), 0 4px 8px rgba(35, 48, 57, 0.08);
+  --rvu-shadow-gold: 0 6px 20px rgba(211, 169, 87, 0.32);
   
   --rvu-radius-sm: 8px;
   --rvu-radius-md: 14px;
@@ -45,7 +61,7 @@
 /* Base resets & scoping */
 .rvu-redesign {
   font-family: var(--rvu-font-sans);
-  color: var(--rvu-slate-800);
+  color: var(--rvu-body);
   background-color: var(--rvu-slate-50);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -72,7 +88,7 @@
 .rvu-redesign h2, 
 .rvu-redesign h3, 
 .rvu-redesign h4 {
-  color: var(--rvu-navy);
+  color: var(--rvu-heading);
   font-family: var(--rvu-font-sans);
   font-weight: 700;
   line-height: 1.25;
@@ -82,6 +98,7 @@
 .rvu-section-title {
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   letter-spacing: -0.02em;
+  color: var(--rvu-primary);
   text-wrap: balance;
   margin-bottom: 12px;
 }
@@ -102,19 +119,20 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   background-color: var(--rvu-gold-light);
-  border: 1px solid rgba(234, 170, 0, 0.4);
+  border: 1px solid var(--rvu-secondary-border);
   padding: 6px 14px;
   border-radius: var(--rvu-radius-full);
   margin-bottom: 12px;
 }
 
-/* Hero Section with Bento Statistics */
+/* Hero Section with Official RVU Placement Banner */
 .rvu-hero {
-  background: linear-gradient(135deg, var(--rvu-navy-dark) 0%, var(--rvu-navy) 60%, var(--rvu-navy-light) 100%);
+  background: linear-gradient(135deg, rgba(21, 30, 36, 0.94) 0%, rgba(35, 48, 57, 0.88) 100%),
+              url('https://d2b6aloc836m7p.cloudfront.net/wp-content/uploads/2026/08/Webbanner-1920-x-850_1920-x-850-scaled.jpg') center/cover no-repeat;
   color: var(--rvu-white);
-  padding: clamp(48px, 8vw, 84px) 0 clamp(40px, 6vw, 64px);
+  padding: clamp(52px, 8vw, 90px) 0 clamp(44px, 6vw, 70px);
   position: relative;
   overflow: hidden;
 }
@@ -126,7 +144,7 @@
   right: -10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(234, 170, 0, 0.18) 0%, rgba(0, 33, 71, 0) 70%);
+  background: radial-gradient(circle, rgba(211, 169, 87, 0.18) 0%, rgba(35, 48, 57, 0) 70%);
   pointer-events: none;
 }
 
@@ -156,7 +174,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--rvu-gold);
-  border: 1px solid rgba(234, 170, 0, 0.3);
+  border: 1px solid var(--rvu-secondary-border);
   margin-bottom: 18px;
 }
 
@@ -177,7 +195,7 @@
 
 .rvu-hero-paragraph {
   font-size: clamp(1rem, 1.3vw, 1.15rem);
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.65;
   margin-bottom: 32px;
   max-width: 54ch;
@@ -207,14 +225,14 @@
 
 .rvu-btn-primary {
   background-color: var(--rvu-gold);
-  color: var(--rvu-navy-dark);
+  color: var(--rvu-primary-dark);
   box-shadow: var(--rvu-shadow-gold);
 }
 
 .rvu-btn-primary:hover {
   background-color: var(--rvu-gold-hover);
+  color: var(--rvu-primary-dark);
   transform: translateY(-2px);
-  color: var(--rvu-navy-dark);
 }
 
 .rvu-btn-outline-light {
@@ -224,7 +242,7 @@
 }
 
 .rvu-btn-outline-light:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
   border-color: var(--rvu-white);
   color: var(--rvu-white);
 }
@@ -237,8 +255,8 @@
 }
 
 .rvu-bento-card {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--rvu-radius-md);
   padding: 20px 18px;
   backdrop-filter: blur(12px);
@@ -249,15 +267,15 @@
 }
 
 .rvu-bento-card:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(234, 170, 0, 0.5);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--rvu-gold);
   transform: translateY(-3px);
 }
 
 .rvu-bento-card.featured {
   grid-column: span 2;
-  background: linear-gradient(135deg, rgba(234, 170, 0, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
-  border: 1px solid rgba(234, 170, 0, 0.4);
+  background: linear-gradient(135deg, rgba(211, 169, 87, 0.24) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border: 1px solid var(--rvu-secondary-border);
   padding: 24px 22px;
 }
 
@@ -273,13 +291,13 @@
 .rvu-stat-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.35;
 }
 
 .rvu-stat-subtext {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.65);
   margin-top: 4px;
 }
 
@@ -311,7 +329,7 @@
   font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--rvu-slate-500);
+  color: var(--rvu-primary);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -330,8 +348,8 @@
   padding: 8px 18px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--rvu-navy);
-  background-color: var(--rvu-slate-100);
+  color: var(--rvu-primary);
+  background-color: var(--rvu-primary-tint);
   border: 1px solid var(--rvu-slate-200);
   border-radius: var(--rvu-radius-full);
   text-decoration: none;
@@ -341,16 +359,12 @@
 
 .rvu-pill-link:hover,
 .rvu-pill-link.active {
-  background-color: var(--rvu-navy);
+  background-color: var(--rvu-primary);
   color: var(--rvu-white);
-  border-color: var(--rvu-navy);
+  border-color: var(--rvu-primary);
 }
 
 .rvu-pill-link i {
-  color: var(--rvu-gold);
-}
-
-.rvu-pill-link:hover i {
   color: var(--rvu-gold);
 }
 
@@ -368,7 +382,7 @@
 
 .rvu-marquee-header h3 {
   font-size: 1.35rem;
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   font-weight: 700;
 }
 
@@ -486,7 +500,7 @@
 
 .rvu-feature-card:hover {
   box-shadow: var(--rvu-shadow-md);
-  border-color: rgba(0, 33, 71, 0.2);
+  border-color: var(--rvu-gold);
   transform: translateY(-3px);
 }
 
@@ -494,8 +508,8 @@
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background-color: var(--rvu-navy-tint);
-  color: var(--rvu-navy);
+  background-color: var(--rvu-primary-tint);
+  color: var(--rvu-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -510,6 +524,7 @@
 
 .rvu-feature-card h4 {
   font-size: 1.2rem;
+  color: var(--rvu-primary);
   margin-bottom: 12px;
 }
 
@@ -545,7 +560,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--rvu-navy);
+  background-color: var(--rvu-primary);
   color: var(--rvu-white);
   padding: 8px 18px;
   border-radius: var(--rvu-radius-full);
@@ -582,13 +597,13 @@
 }
 
 .rvu-tab-btn:hover {
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   background-color: var(--rvu-slate-100);
 }
 
 .rvu-tab-btn.active {
-  color: var(--rvu-navy);
-  background-color: var(--rvu-navy-tint);
+  color: var(--rvu-primary);
+  background-color: var(--rvu-primary-tint);
   font-weight: 700;
 }
 
@@ -640,7 +655,7 @@
 }
 
 .rvu-programs-table th {
-  background-color: var(--rvu-navy);
+  background-color: var(--rvu-primary);
   color: var(--rvu-white);
   padding: 12px 18px;
   text-align: left;
@@ -662,7 +677,7 @@
 
 .rvu-programs-table td.strength {
   font-weight: 700;
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   text-align: right;
 }
 
@@ -671,15 +686,15 @@
 }
 
 .rvu-school-summary {
-  background-color: var(--rvu-navy-tint);
-  border: 1px solid rgba(0, 33, 71, 0.15);
+  background-color: var(--rvu-primary-tint);
+  border: 1px solid rgba(35, 48, 57, 0.15);
   border-radius: var(--rvu-radius-md);
   padding: 24px 22px;
 }
 
 .rvu-school-summary h5 {
   font-size: 1.1rem;
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   margin-bottom: 10px;
   font-weight: 700;
 }
@@ -692,7 +707,7 @@
 
 /* Recruiter Express CTA Bar */
 .rvu-recruiter-cta-box {
-  background: linear-gradient(135deg, var(--rvu-navy) 0%, var(--rvu-navy-dark) 100%);
+  background: linear-gradient(135deg, var(--rvu-primary) 0%, var(--rvu-primary-dark) 100%);
   color: var(--rvu-white);
   border-radius: var(--rvu-radius-lg);
   padding: clamp(32px, 5vw, 48px);
@@ -719,7 +734,7 @@
   bottom: -50px;
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(234, 170, 0, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(211, 169, 87, 0.25) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -778,7 +793,7 @@
 .rvu-step-card:hover {
   background-color: var(--rvu-white);
   box-shadow: var(--rvu-shadow-md);
-  border-color: var(--rvu-navy);
+  border-color: var(--rvu-gold);
   transform: translateY(-4px);
 }
 
@@ -788,7 +803,7 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background-color: var(--rvu-navy);
+  background-color: var(--rvu-primary);
   color: var(--rvu-gold);
   border-radius: 50%;
   font-weight: 800;
@@ -798,6 +813,7 @@
 
 .rvu-step-card h4 {
   font-size: 1.05rem;
+  color: var(--rvu-primary);
   margin-bottom: 10px;
 }
 
@@ -845,9 +861,9 @@
 
 .rvu-filter-pill:hover,
 .rvu-filter-pill.active {
-  background-color: var(--rvu-navy);
+  background-color: var(--rvu-primary);
   color: var(--rvu-white);
-  border-color: var(--rvu-navy);
+  border-color: var(--rvu-primary);
 }
 
 .rvu-accordion-item {
@@ -874,7 +890,7 @@
   text-align: left;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   cursor: pointer;
   transition: var(--rvu-transition);
 }
@@ -892,7 +908,7 @@
   justify-content: center;
   border-radius: 50%;
   background-color: var(--rvu-slate-100);
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   font-size: 0.75rem;
   transition: var(--rvu-transition);
   flex-shrink: 0;
@@ -901,7 +917,7 @@
 .rvu-accordion-item.open .rvu-accordion-icon {
   transform: rotate(180deg);
   background-color: var(--rvu-gold);
-  color: var(--rvu-navy);
+  color: var(--rvu-primary-dark);
 }
 
 .rvu-accordion-content {
@@ -976,7 +992,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--rvu-emerald);
+  color: var(--rvu-gold-dark);
   font-weight: 700;
   font-size: 0.8125rem;
   margin-bottom: 8px;
@@ -984,6 +1000,7 @@
 
 .rvu-trust-card h4 {
   font-size: 1.15rem;
+  color: var(--rvu-primary);
   margin-bottom: 8px;
 }
 
@@ -1030,13 +1047,14 @@
 
 .rvu-team-card:hover {
   background-color: var(--rvu-white);
-  border-color: var(--rvu-navy);
+  border-color: var(--rvu-gold);
   box-shadow: var(--rvu-shadow-md);
   transform: translateY(-3px);
 }
 
 .rvu-team-card h4 {
   font-size: 1.15rem;
+  color: var(--rvu-primary);
   margin-bottom: 4px;
 }
 
@@ -1063,7 +1081,7 @@
 }
 
 .rvu-team-contact-list a {
-  color: var(--rvu-navy);
+  color: var(--rvu-primary);
   text-decoration: none;
   font-weight: 600;
 }
@@ -1081,7 +1099,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 21, 46, 0.7);
+  background-color: rgba(21, 30, 36, 0.8);
   backdrop-filter: blur(4px);
   z-index: 99999;
   align-items: center;
@@ -1117,7 +1135,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--rvu-navy);
+  background-color: var(--rvu-primary);
   color: var(--rvu-white);
   border-radius: var(--rvu-radius-lg) var(--rvu-radius-lg) 0 0;
 }
@@ -1168,9 +1186,9 @@
 .rvu-form-input:focus,
 .rvu-form-select:focus,
 .rvu-form-textarea:focus {
-  border-color: var(--rvu-navy);
+  border-color: var(--rvu-gold);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 33, 71, 0.12);
+  box-shadow: 0 0 0 3px rgba(211, 169, 87, 0.25);
 }
 
 /* Accessibility & Utility Classes */
