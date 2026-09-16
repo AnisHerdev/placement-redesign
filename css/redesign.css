@@ -414,6 +414,21 @@
   }
 }
 
+/* Reclaim space left by the removed fixed mobile bottom bar
+   (.mobile_menu markup deleted from index.html). The Divi child theme
+   compensates for that bar with body/footer bottom padding — reset it
+   so no empty strip remains at the bottom on small screens. */
+@media (max-width: 981px) {
+  body {
+    padding-bottom: 0 !important;
+  }
+}
+@media (max-width: 580px) {
+  #footer-bottom {
+    padding-bottom: 0 !important;
+  }
+}
+
 
 /* Recruiter Marquee Banner */
 .rvu-marquee-section {
