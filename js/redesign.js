@@ -57,10 +57,10 @@ function animateValue(obj, start, end, duration, prefix, suffix, isDecimal) {
 
 /* 2. School-by-School Talent Directory Tab Switcher */
 function initSchoolTabs() {
-  const tabBtns = document.querySelectorAll('.rvu-tab-btn');
+  const tabBtns = Array.from(document.querySelectorAll('.rvu-tab-btn'));
   const tabPanes = document.querySelectorAll('.rvu-tab-pane');
 
-  tabBtns.forEach(btn => {
+  tabBtns.forEach((btn, index) => {
     btn.addEventListener('click', () => {
       const targetSchool = btn.getAttribute('data-school');
 
@@ -76,6 +76,21 @@ function initSchoolTabs() {
       const targetPane = document.getElementById(`school-pane-${targetSchool}`);
       if (targetPane) {
         targetPane.classList.add('active');
+      }
+    });
+
+    // Keyboard arrow accessibility for WAI-ARIA tablist
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = tabBtns[(index + 1) % tabBtns.length];
+        next.focus();
+        next.click();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = tabBtns[(index - 1 + tabBtns.length) % tabBtns.length];
+        prev.focus();
+        prev.click();
       }
     });
   });
