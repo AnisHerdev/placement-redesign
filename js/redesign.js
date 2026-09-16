@@ -189,7 +189,7 @@ function initRecruiterModal() {
         form.innerHTML = `
           <div style="text-align: center; padding: 30px 10px;">
             <div style="width: 56px; height: 56px; background-color: #d1fae5; color: #065f46; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px;">✓</div>
-            <h4 style="color: #002147; font-size: 1.3rem; margin-bottom: 8px;">Expression of Interest Received!</h4>
+            <h4 style="color: #233039; font-size: 1.3rem; margin-bottom: 8px;">Expression of Interest Received!</h4>
             <p style="color: #475569; font-size: 0.95rem; margin-bottom: 20px;">Thank you for partnering with RV University. The Corporate & Alumni Relations (CAR) directorate will contact you within 24 business hours.</p>
             <button type="button" class="rvu-btn rvu-btn-primary" onclick="document.getElementById('recruiter-modal').classList.remove('active'); document.body.style.overflow='';">Close</button>
           </div>

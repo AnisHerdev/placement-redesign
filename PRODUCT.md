@@ -25,3 +25,4 @@ A competition redesign of the official RV University (RVU) Placements portal (`h
 ## Boundary Constraints
 - The header slice up to `<div class="flexy-crumb">...</div>` is frozen/untouched.
 - The footer slice from `<footer class="et-l et-l--footer">...</footer>` downwards is frozen/untouched.
+- **Brand Integrity Rule**: Strictly **no bottom app navigation bar** — keeps the mobile viewport clean, distinguished, and un-gimmicky, relying on top momentum touch pills instead.
