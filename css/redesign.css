@@ -303,69 +303,151 @@
 
 /* Stakeholder Quick-Nav Pill Bar */
 .rvu-stakeholder-nav {
-  background-color: var(--rvu-white);
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rvu-slate-200);
   position: sticky;
   top: 0;
-  z-index: 100;
-  box-shadow: var(--rvu-shadow-sm);
+  z-index: 99;
+  box-shadow: 0 2px 8px rgba(35, 48, 57, 0.05);
+  transition: var(--rvu-transition);
 }
 
 .rvu-stakeholder-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow-x: auto;
-  scrollbar-width: none;
+  gap: 16px;
   padding: 10px 0;
-  gap: 12px;
-}
-
-.rvu-stakeholder-inner::-webkit-scrollbar {
-  display: none;
 }
 
 .rvu-nav-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--rvu-primary);
+  letter-spacing: 0.05em;
+  color: var(--rvu-slate-500);
   white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  flex-shrink: 0;
+}
+
+.rvu-nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--rvu-gold);
+  box-shadow: 0 0 0 3px rgba(211, 169, 87, 0.25);
+  animation: pulseGold 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseGold {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.8; }
 }
 
 .rvu-pills-container {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
+  justify-content: flex-end;
 }
 
 .rvu-pill-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 18px;
+  padding: 8px 16px;
+  font-family: var(--rvu-font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--rvu-primary);
-  background-color: var(--rvu-primary-tint);
-  border: 1px solid var(--rvu-slate-200);
+  background-color: var(--rvu-white);
+  border: 1.5px solid var(--rvu-slate-200);
   border-radius: var(--rvu-radius-full);
   text-decoration: none;
   white-space: nowrap;
   transition: var(--rvu-transition);
+  min-height: 40px;
 }
 
-.rvu-pill-link:hover,
-.rvu-pill-link.active {
-  background-color: var(--rvu-primary);
-  color: var(--rvu-white);
-  border-color: var(--rvu-primary);
-}
-
-.rvu-pill-link i {
+.rvu-pill-icon {
   color: var(--rvu-gold);
+  flex-shrink: 0;
+  transition: var(--rvu-transition);
+}
+
+.rvu-pill-link:hover {
+  background-color: var(--rvu-primary-tint);
+  border-color: var(--rvu-gold);
+  color: var(--rvu-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(35, 48, 57, 0.08);
+}
+
+.rvu-pill-link.active {
+  background-color: var(--rvu-primary) !important;
+  color: var(--rvu-white) !important;
+  border-color: var(--rvu-primary) !important;
+  box-shadow: 0 3px 10px rgba(35, 48, 57, 0.2);
+  transform: translateY(-1px);
+}
+
+.rvu-pill-link.active .rvu-pill-icon {
+  color: var(--rvu-gold) !important;
+}
+
+/* Tablet & Mobile Responsiveness for Quick-Nav */
+@media (max-width: 991px) {
+  .rvu-stakeholder-inner {
+    padding: 8px 0;
+  }
+  
+  .rvu-nav-label {
+    display: none; /* Hide label on mobile/tablet to maximize navigation room */
+  }
+  
+  .rvu-pills-container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+  
+  .rvu-pills-container::-webkit-scrollbar {
+    height: 3px;
+  }
+  
+  .rvu-pills-container::-webkit-scrollbar-thumb {
+    background: var(--rvu-slate-300);
+    border-radius: 4px;
+  }
+  
+  .rvu-pill-link {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    padding: 7px 14px;
+    font-size: 0.8125rem;
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rvu-pill-link {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
 }
 
 /* Recruiter Marquee Banner */
@@ -1129,24 +1211,75 @@
   border-radius: var(--rvu-radius-sm);
 }
 
-/* Tier 4: CDCR Leadership & Contact Directory */
+/* Tier 4: CDCR Leadership & Recruiter Contact Directory */
 .rvu-team-section {
   padding: clamp(56px, 8vw, 96px) 0;
   background-color: var(--rvu-white);
 }
 
+/* Recruiter Fast-Track SLA Bar */
+.rvu-recruiter-sla-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--rvu-primary-tint);
+  border: 1px solid rgba(35, 48, 57, 0.12);
+  border-left: 4px solid var(--rvu-gold);
+  padding: 16px 24px;
+  border-radius: var(--rvu-radius-md);
+  margin-bottom: 36px;
+  box-shadow: var(--rvu-shadow-sm);
+}
+
+.rvu-sla-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rvu-sla-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--rvu-primary);
+  color: var(--rvu-white);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--rvu-radius-full);
+  letter-spacing: 0.02em;
+}
+
+.rvu-sla-text {
+  font-size: 0.875rem;
+  color: var(--rvu-slate-700);
+  font-weight: 500;
+}
+
+.rvu-sla-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .rvu-team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
 }
 
 .rvu-team-card {
   background-color: var(--rvu-slate-50);
-  border: 1px solid var(--rvu-slate-200);
+  border: 1.5px solid var(--rvu-slate-200);
   border-radius: var(--rvu-radius-md);
-  padding: 26px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
   transition: var(--rvu-transition);
+  position: relative;
 }
 
 .rvu-team-card:hover {
@@ -1156,43 +1289,158 @@
   transform: translateY(-3px);
 }
 
+.rvu-team-card-header {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rvu-slate-200);
+}
+
+.rvu-desk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--rvu-white);
+  border: 1px solid var(--rvu-slate-200);
+  color: var(--rvu-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 12px;
+  border-radius: var(--rvu-radius-full);
+  margin-bottom: 10px;
+  transition: var(--rvu-transition);
+}
+
+.rvu-team-card:hover .rvu-desk-badge {
+  border-color: var(--rvu-gold);
+  background-color: var(--rvu-gold-light);
+  color: var(--rvu-primary-dark);
+}
+
 .rvu-team-card h4 {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   color: var(--rvu-primary);
   margin-bottom: 4px;
+  font-weight: 700;
 }
 
 .rvu-team-role {
-  font-size: 0.84375rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  color: var(--rvu-gold-dark);
+  color: var(--rvu-slate-600);
+  margin-bottom: 0;
+}
+
+.rvu-team-desc {
+  font-size: 0.875rem;
+  color: var(--rvu-slate-700);
+  line-height: 1.5;
   margin-bottom: 14px;
 }
 
-.rvu-team-contact-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.875rem;
+.rvu-spec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
 }
 
-.rvu-team-contact-list li {
+.rvu-spec-tag {
+  font-size: 0.78125rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: var(--rvu-white);
+  border: 1px solid var(--rvu-slate-200);
+  color: var(--rvu-slate-700);
+}
+
+.rvu-contact-details {
+  background-color: var(--rvu-white);
+  border: 1px solid var(--rvu-slate-200);
+  border-radius: var(--rvu-radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rvu-contact-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.84375rem;
+}
+
+.rvu-contact-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: var(--rvu-slate-700);
-  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.rvu-team-contact-list a {
+.rvu-contact-info svg {
+  color: var(--rvu-gold);
+  flex-shrink: 0;
+}
+
+.rvu-contact-info a {
   color: var(--rvu-primary);
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
 }
 
-.rvu-team-contact-list a:hover {
+.rvu-contact-info a:hover {
   color: var(--rvu-gold-dark);
   text-decoration: underline;
+}
+
+.rvu-copy-btn {
+  background: none;
+  border: 1px solid var(--rvu-slate-200);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--rvu-slate-600);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--rvu-transition);
+  flex-shrink: 0;
+}
+
+.rvu-copy-btn:hover {
+  border-color: var(--rvu-gold);
+  color: var(--rvu-primary);
+  background-color: var(--rvu-primary-tint);
+}
+
+.rvu-copy-btn.copied {
+  background-color: #d1fae5 !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+}
+
+.rvu-card-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rvu-card-actions .rvu-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 10px 16px;
+  font-size: 0.875rem;
 }
 
 /* Corporate Modal (JAF & Drive Booking) */
@@ -1317,5 +1565,431 @@
   .rvu-feature-card,
   .rvu-bento-card {
     transition: none;
+  }
+}
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE ADAPTATION (No Bottom Nav - True Brand Experience)
+   ========================================================================== */
+
+/* Global Mobile Foundations & Overflow Protection */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+.rvu-redesign {
+  overflow-x: hidden !important;
+  width: 100%;
+}
+
+.rvu-container {
+  width: 100%;
+  max-width: 1240px;
+  box-sizing: border-box;
+}
+
+/* 1. TABLET SCREENS (max-width: 991px) */
+@media (max-width: 991px) {
+  .rvu-hero-content {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .rvu-hero-heading {
+    font-size: clamp(2.1rem, 5.5vw, 2.8rem);
+  }
+
+  .rvu-hero-paragraph {
+    max-width: 100%;
+  }
+
+  .rvu-stepper-container {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    position: relative;
+    padding-left: 18px;
+    border-left: 2.5px solid var(--rvu-gold);
+    margin-left: 8px;
+  }
+
+  .rvu-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .rvu-team-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .rvu-parent-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* 2. MOBILE PHONES (max-width: 640px) */
+@media (max-width: 640px) {
+  .rvu-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Section Spacing */
+  .rvu-hero {
+    padding: 38px 0 32px;
+  }
+
+  .rvu-corporate-section,
+  .rvu-student-section,
+  .rvu-parent-section,
+  .rvu-team-section {
+    padding: 44px 0;
+  }
+
+  .rvu-section-title {
+    font-size: clamp(1.65rem, 6.5vw, 2rem);
+    line-height: 1.25;
+  }
+
+  .rvu-section-desc {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  /* Hero Tagline & Heading */
+  .rvu-hero-tagline {
+    font-size: 0.78125rem;
+    padding: 5px 12px;
+    margin-bottom: 14px;
+    max-width: 100%;
+  }
+
+  .rvu-hero-heading {
+    font-size: clamp(1.85rem, 7.5vw, 2.35rem);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .rvu-hero-paragraph {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* Full-width Touch Buttons in Hero */
+  .rvu-hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .rvu-hero-actions .rvu-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+    font-size: 0.9375rem;
+  }
+
+  /* Bento Stats Grid */
+  .rvu-bento-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .rvu-bento-card.featured {
+    grid-column: span 1;
+    padding: 18px 16px;
+  }
+
+  .rvu-bento-card {
+    padding: 16px 14px;
+  }
+
+  .rvu-stat-number {
+    font-size: 1.85rem;
+    margin-bottom: 4px;
+  }
+
+  .rvu-stat-label {
+    font-size: 0.84375rem;
+  }
+
+  .rvu-stat-subtext {
+    font-size: 0.75rem;
+  }
+
+  /* Why Recruit Feature Cards */
+  .rvu-features-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .rvu-feature-card {
+    padding: 22px 18px;
+  }
+
+  .rvu-feature-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+  }
+
+  /* School-by-School Talent Directory */
+  .rvu-school-directory {
+    padding: 20px 14px;
+    border-radius: var(--rvu-radius-md);
+    margin-bottom: 36px;
+  }
+
+  .rvu-directory-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+  }
+
+  .rvu-talent-count-badge {
+    align-self: flex-start;
+    font-size: 0.8125rem;
+    padding: 6px 14px;
+  }
+
+  /* School Tabs as 1-column mobile touch cards */
+  .rvu-school-tabs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .rvu-tab-btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+  }
+
+  .rvu-tab-count {
+    min-width: 28px;
+    padding: 2px 7px;
+    font-size: 0.78125rem;
+  }
+
+  /* Table responsive styling on mobile */
+  .rvu-table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rvu-slate-200);
+    border-radius: var(--rvu-radius-sm);
+    margin-bottom: 16px;
+  }
+
+  .entry-content table.rvu-programs-table th,
+  .rvu-redesign .rvu-programs-table th,
+  .rvu-programs-table th {
+    padding: 12px 12px !important;
+    font-size: 0.78125rem !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .entry-content table.rvu-programs-table td,
+  .rvu-redesign .rvu-programs-table td,
+  .rvu-programs-table td {
+    padding: 12px 12px !important;
+    font-size: 0.84375rem !important;
+  }
+
+  .rvu-strength-badge {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+  }
+
+  .rvu-school-summary {
+    padding: 18px 16px;
+  }
+
+  .rvu-school-summary a.rvu-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Recruiter Express CTA Box */
+  .rvu-recruiter-cta-box {
+    padding: 26px 18px;
+    border-radius: var(--rvu-radius-md);
+  }
+
+  .rvu-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .rvu-cta-buttons .rvu-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 5-Stage Stepper */
+  .rvu-stepper-container {
+    margin-bottom: 40px;
+    padding-left: 14px;
+    margin-left: 6px;
+  }
+
+  .rvu-step-card {
+    padding: 18px 16px;
+  }
+
+  .rvu-step-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8125rem;
+    margin-bottom: 10px;
+  }
+
+  /* Policy Accordion Drawer */
+  .rvu-policy-drawer {
+    padding: 20px 14px;
+    border-radius: var(--rvu-radius-md);
+  }
+
+  .rvu-policy-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .rvu-policy-filter {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .rvu-filter-pill {
+    flex: 1 1 calc(50% - 6px);
+    text-align: center;
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: 0.78125rem;
+  }
+
+  .rvu-accordion-btn {
+    padding: 14px 16px;
+    font-size: 0.9375rem;
+  }
+
+  .rvu-accordion-content {
+    padding: 0 16px 16px;
+    font-size: 0.875rem;
+  }
+
+  /* Parent Assurance Section */
+  .rvu-trust-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .rvu-trust-card {
+    padding: 18px 16px;
+  }
+
+  .rvu-parent-graphic-box {
+    padding: 18px 14px;
+  }
+
+  /* CAR Directorate & Recruiter SLA Strip */
+  .rvu-recruiter-sla-strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+
+  .rvu-sla-actions .rvu-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .rvu-team-card {
+    padding: 20px 16px;
+  }
+
+  .rvu-team-card h4 {
+    font-size: 1.15rem;
+  }
+
+  .rvu-card-actions .rvu-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Recruiter Modal on Mobile */
+  .rvu-modal-backdrop {
+    padding: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rvu-modal {
+    max-width: 100%;
+    width: 100%;
+    max-height: 92vh;
+    border-radius: var(--rvu-radius-md);
+  }
+
+  .rvu-modal-header {
+    padding: 18px 20px;
+  }
+
+  .rvu-modal-header h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  .rvu-modal-body {
+    padding: 20px 16px 24px;
+  }
+
+  /* iOS Auto-Zoom Prevention on Mobile Inputs */
+  .rvu-form-input,
+  .rvu-form-select,
+  .rvu-form-textarea {
+    font-size: 1rem !important; /* 16px minimum prevents iOS Safari viewport auto-zoom */
+    padding: 12px 14px;
+    min-height: 48px;
+  }
+}
+
+/* 3. ULTRA-COMPACT PHONES (max-width: 380px) */
+@media (max-width: 380px) {
+  .rvu-hero-heading {
+    font-size: 1.75rem;
+  }
+
+  .rvu-filter-pill {
+    flex: 1 1 100%;
+  }
+
+  .rvu-pill-link {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+
+  .rvu-contact-info {
+    font-size: 0.78125rem;
   }
 }

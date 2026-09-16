@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPolicyFilters();
   initRecruiterModal();
   initStakeholderNavScroll();
+  initCopyButtons();
 });
 
 /* 1. Animated Stat Counters with IntersectionObserver */
@@ -156,6 +157,11 @@ function initRecruiterModal() {
 
   openBtns.forEach(btn => btn.addEventListener('click', (e) => {
     e.preventDefault();
+    const schoolSelect = btn.getAttribute('data-school-select');
+    if (schoolSelect) {
+      const selectEl = document.getElementById('target-school');
+      if (selectEl) selectEl.value = schoolSelect;
+    }
     openModal();
   }));
 
@@ -193,28 +199,106 @@ function initRecruiterModal() {
   }
 }
 
-/* 6. Stakeholder Nav Active Tracker on Scroll */
+/* 6. Stakeholder Nav Active Tracker on Scroll & Smooth Click Navigation */
 function initStakeholderNavScroll() {
-  const navLinks = document.querySelectorAll('.rvu-pill-link');
-  const sections = document.querySelectorAll('section[id]');
+  const navLinks = Array.from(document.querySelectorAll('.rvu-pill-link'));
+  if (!navLinks.length) return;
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollPos = window.scrollY + 120;
+  const targetMap = navLinks.map(link => {
+    const id = link.getAttribute('href').replace('#', '');
+    return {
+      id,
+      link,
+      target: document.getElementById(id)
+    };
+  }).filter(item => item.target !== null);
 
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
+  const onScroll = () => {
+    const scrollPos = window.scrollY + 140;
+    let activeId = '';
+
+    targetMap.forEach(item => {
+      const top = item.target.getBoundingClientRect().top + window.scrollY;
+      const height = item.target.offsetHeight;
       if (scrollPos >= top && scrollPos < top + height) {
-        current = section.getAttribute('id');
+        activeId = item.id;
       }
     });
 
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
+    targetMap.forEach(item => {
+      if (activeId && item.id === activeId) {
+        item.link.classList.add('active');
+      } else {
+        item.link.classList.remove('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Smooth click scroll with sticky header offset
+  targetMap.forEach(item => {
+    item.link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const headerOffset = 64;
+      const elementPosition = item.target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+
+      if (history.pushState) {
+        history.pushState(null, null, `#${item.id}`);
       }
     });
   });
+}
+
+/* 7. Interactive Clipboard Copy Buttons */
+function initCopyButtons() {
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const text = btn.getAttribute('data-copy');
+      if (!text) return;
+
+      const performFeedback = () => {
+        const originalContent = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+          btn.classList.remove('copied');
+        }, 2200);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(performFeedback).catch(() => {
+          fallbackCopy(text);
+          performFeedback();
+        });
+      } else {
+        fallbackCopy(text);
+        performFeedback();
+      }
+    });
+  });
+}
+
+function fallbackCopy(text) {
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'fixed';
+  textArea.style.opacity = '0';
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+  } catch (err) {}
+  document.body.removeChild(textArea);
 }
